@@ -1,116 +1,57 @@
-const CART_KEY = "cutieficCart";
-const SECRET = "Cutiefic@2232";
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-function getCart() {
-  return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+/* + - preview qty */
+function changePreviewQty(id, change) {
+  const span = document.getElementById(`preview-${id}`);
+  if (!span) return;
+
+  let qty = parseInt(span.innerText);
+  qty += change;
+  if (qty < 1) qty = 1;
+  span.innerText = qty;
 }
 
-function saveCart(cart) {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-}
+/* ADD TO CART */
+function addToCart(id, name, image) {
+  const qtySpan = document.getElementById(`preview-${id}`);
+  const qty = qtySpan ? parseInt(qtySpan.innerText) : 1;
 
-function changePreviewQty(sku, delta) {
-  const el = document.getElementById("preview-" + sku);
-  let qty = parseInt(el.innerText);
-  qty = Math.max(1, qty + delta);
-  el.innerText = qty;
-}
-
-function addToCart(sku, name, image) {
-  const qty = parseInt(document.getElementById("preview-" + sku).innerText);
-  const cart = getCart();
-
-  const existing = cart.find(i => i.sku === sku);
-  if (existing) {
-    existing.qty += qty;
+  if (!cart[id]) {
+    cart[id] = {
+      id,
+      name,
+      image,
+      qty
+    };
   } else {
-    cart.push({ sku, name, image, qty, price: "" });
+    cart[id].qty += qty;
   }
 
-  saveCart(cart);
-  alert("Added to cart ✅");
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Added to cart");
 }
 
-function renderCart() {
-  const cart = getCart();
-  const box = document.getElementById("cartItems");
-  if (!box) return;
+/* LOAD CART PAGE */
+function loadCart() {
+  const container = document.getElementById("cart-items");
+  if (!container) return;
 
-  box.innerHTML = "";
+  container.innerHTML = "";
   let totalQty = 0;
-  let totalPrice = 0;
 
-  const name = document.getElementById("customerName")?.value || "";
-  const isMarketing = name.includes(SECRET);
-
-  cart.forEach((item, i) => {
+  Object.values(cart).forEach(item => {
     totalQty += item.qty;
-    totalPrice += (item.price || 0) * item.qty;
 
-    box.innerHTML += `
+    container.innerHTML += `
       <div class="cart-item">
-        <img src="${item.image}">
-        <div>
-          <b>${item.name}</b><br>
-          SKU: ${item.sku}
-          <div class="qty-control">
-            <button onclick="updateQty(${i},-1)">−</button>
-            <span>${item.qty}</span>
-            <button onclick="updateQty(${i},1)">+</button>
-          </div>
-          ${isMarketing ? `
-            <input placeholder="Price"
-              value="${item.price}"
-              onchange="setPrice(${i},this.value)">
-          ` : ``}
-        </div>
+        <img src="${item.image}" style="height:60px">
+        <div>${item.name}</div>
+        <div>Qty: ${item.qty}</div>
       </div>
     `;
   });
 
-  document.getElementById("totalQty").innerText =
-    "Total Quantity: " + totalQty;
-
-  document.getElementById("totalPrice").innerText =
-    isMarketing ? "Total Price: ₹" + totalPrice : "";
+  document.getElementById("total-qty").innerText = totalQty;
 }
 
-function updateQty(i, d) {
-  const cart = getCart();
-  cart[i].qty += d;
-  if (cart[i].qty <= 0) cart.splice(i,1);
-  saveCart(cart);
-  renderCart();
-}
-
-function setPrice(i, val) {
-  const cart = getCart();
-  cart[i].price = val;
-  saveCart(cart);
-}
-
-function sendToWhatsApp() {
-  const cart = getCart();
-  if (!cart.length) return alert("Cart empty");
-
-  const nameRaw = customerName.value;
-  const isMarketing = nameRaw.includes(SECRET);
-  const name = nameRaw.replace(SECRET,"").trim();
-
-  let msg = `New Cutiefic Order%0A`;
-  msg += `Name: ${name}%0A`;
-  msg += `Company: ${companyName.value}%0A`;
-  msg += `Address: ${address.value}%0A`;
-  msg += `Transport: ${transport.value}%0A%0A`;
-
-  cart.forEach(i=>{
-    msg += `${i.name} (SKU:${i.sku})%0AQty:${i.qty}%0A`;
-    if (isMarketing && i.price) msg += `Price: ₹${i.price}%0A`;
-    msg += `%0A`;
-  });
-
-  window.open(`https://wa.me/9020902902?text=${msg}`,"_blank");
-}
-
-document.addEventListener("input", renderCart);
-renderCart();
+document.addEventListener("DOMContentLoaded", loadCart);
