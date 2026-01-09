@@ -3,11 +3,9 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Nunito',sans-serif;}
 
 body{
-  background:
-    url("../images/bgpattern.png") repeat,
-    #ffe6ef;
+  background:#ffeaf3 url("../images/bgpattern.png") repeat;
+  min-height:100vh;
 }
-
 
 .header{
   display:flex;
@@ -38,7 +36,7 @@ body{
   gap:16px;
   padding:16px;
 }
- 
+
 .card{
   background:white;
   padding:14px;
@@ -168,10 +166,4 @@ body{
 .icon-btn{
   position:absolute;
   right:16px;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-*{
-  font-family:'Poppins', sans-serif;
 }
