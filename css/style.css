@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    url("../images/bgpattern.png") repeat,
+    #ffeaf3;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: white;
+}
+
+.logo {
+  height: 52px;
+  width: auto;
+}
+
+/* ICON BUTTON */
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ff6fa5;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* TITLES */
+.page-title {
+  text-align: center;
+  margin: 20px 0;
+  font-weight: 800;
+}
+
+/* CATEGORIES */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+/* CART */
+.cart-item {
+  background: white;
+  margin: 12px;
+  padding: 12px;
+  border-radius: 12px;
+}
