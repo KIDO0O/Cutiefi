@@ -5,6 +5,7 @@
   <title>Erasers</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 
 <header class="header">
@@ -15,22 +16,13 @@
 
 <h2 class="page-title">Erasers</h2>
 
-<div class="categories">
+<div class="category-grid">
 
-  <div class="card product-card">
-    <div class="image-scroll">
-      <img src="../images/eraser_1.jpg">
-      <img src="../images/eraser_2.jpg">
-    </div>
+  <div class="product-card">
+    <img src="../images/eraser_1.jpg">
 
     <div class="product-name">French Fries Eraser</div>
     <div class="sku">SKU: 100001</div>
-
-    <div class="qty-control">
-      <button onclick="changePreviewQty('100001',-1)">−</button>
-      <span id="preview-100001">1</span>
-      <button onclick="changePreviewQty('100001',1)">+</button>
-    </div>
 
     <button class="add-btn"
       onclick="addToCart(
@@ -41,9 +33,6 @@
       Add to Cart
     </button>
   </div>
-
-</div>
-
 
 </div>
 

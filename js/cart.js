@@ -1,82 +1,103 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || {};
+const CART_KEY = "cutieficCart";
 
-/* + - quantity control */
-function changePreviewQty(id, change) {
-  const span = document.getElementById(`preview-${id}`);
-  if (!span) return;
-
-  let qty = parseInt(span.innerText);
-  qty += change;
-  if (qty < 1) qty = 1;
-  span.innerText = qty;
+function getCart() {
+  return JSON.parse(localStorage.getItem(CART_KEY)) || [];
 }
 
-/* ADD TO CART */
-function addToCart(id, name, image) {
-  const qtySpan = document.getElementById(`preview-${id}`);
-  const qty = qtySpan ? parseInt(qtySpan.innerText) : 1;
+function saveCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
 
-  if (!cart[id]) {
-    cart[id] = {
-      id,
-      name,
-      image,
-      qty
-    };
+function addToCart(sku, name, image) {
+  let cart = getCart();
+  let item = cart.find(p => p.sku === sku);
+
+  if (item) {
+    item.qty += 1;
   } else {
-    cart[id].qty += qty;
+    cart.push({
+      sku,
+      name,
+      image, // MUST be like images/xxx.jpg
+      qty: 1
+    });
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`${name} added to cart!`);
+  saveCart(cart);
+  alert("Added to cart ✅");
 }
 
-/* LOAD CART PAGE */
-function loadCart() {
-  const container = document.getElementById("cart-items");
-  if (!container) return;
+function changeQty(index, delta) {
+  let cart = getCart();
+  cart[index].qty += delta;
 
-  container.innerHTML = "";
-  let totalQty = 0;
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
 
-  Object.values(cart).forEach(item => {
-    totalQty += item.qty;
+  saveCart(cart);
+  renderCart();
+}
 
-    container.innerHTML += `
+function renderCart() {
+  const cart = getCart();
+  const box = document.getElementById("cartItems");
+
+  if (!box) return;
+
+  box.innerHTML = "";
+
+  if (cart.length === 0) {
+    box.innerHTML = "<p class='empty'>Cart is empty 🛒</p>";
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    box.innerHTML += `
       <div class="cart-item">
-        <img src="${item.image}" class="cart-img">
-        <div class="cart-name">${item.name}</div>
-        <div class="cart-qty">Qty: ${item.qty}</div>
+        <img src="${item.image}">
+        <div class="cart-info">
+          <b>${item.name}</b>
+          <div>SKU: ${item.sku}</div>
+
+          <div class="qty-control">
+            <button onclick="changeQty(${index},-1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${index},1)">+</button>
+          </div>
+        </div>
       </div>
     `;
   });
-
-  const totalSpan = document.getElementById("total-qty");
-  if (totalSpan) totalSpan.innerText = totalQty;
 }
 
-document.addEventListener("DOMContentLoaded", loadCart);
-
 function sendToWhatsApp() {
-  let message = "*New Cutiefic Order*%0A%0A";
+  const cart = getCart();
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
+  }
 
   const name = document.getElementById("custName").value;
   const company = document.getElementById("company").value;
   const phone = document.getElementById("phone").value;
   const transport = document.getElementById("transport").value;
 
-  message += `Name: ${name}%0A`;
-  message += `Company: ${company}%0A`;
-  message += `Phone: ${phone}%0A`;
-  message += `Transport: ${transport}%0A%0A`;
+  let msg = `*Cutiefic Order*%0A%0A`;
+  msg += `Name: ${name}%0A`;
+  msg += `Company: ${company}%0A`;
+  msg += `Phone: ${phone}%0A`;
+  msg += `Transport: ${transport}%0A%0A`;
 
-  Object.values(cart).forEach(item => {
-    message += `• ${item.name}%0A`;
-    message += `  Qty: ${item.qty}%0A%0A`;
+  cart.forEach(item => {
+    msg += `${item.name}%0A`;
+    msg += `Qty: ${item.qty}%0A%0A`;
   });
 
   window.open(
-    `https://wa.me/9020902902?text=${message}`,
+    `https://wa.me/9020902902?text=${msg}`,
     "_blank"
   );
 }
+
+renderCart();
