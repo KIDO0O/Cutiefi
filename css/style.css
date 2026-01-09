@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -8,149 +8,143 @@
 }
 
 body {
-  background:
-    url("../images/bgpattern.png") repeat,
-    #ffeaf3;
+  background: #ffeaf3;
   min-height: 100vh;
 }
 
 /* HEADER */
-.header{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  padding:14px 12px;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 12px;
 }
 
-.logo{
-  height:52px;
+.logo {
+  height: 52px;
 }
 
-/* ICON BUTTON */
-.icon-btn{
-  position:absolute;
-  top:14px;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:#ff6fa5;
-  color:white;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
+/* ICON BUTTONS */
+.icon-btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ff6fa5;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 
-.icon-btn:first-child{ left:12px; }
-.icon-btn:last-child{ right:12px; }
+.icon-btn:first-child {
+  left: 12px;
+}
+
+.icon-btn:last-child {
+  right: 12px;
+}
 
 /* TITLES */
-.page-title{
-  text-align:center;
-  margin:20px 0;
-  font-weight:800;
+.page-title {
+  text-align: center;
+  margin: 16px 0;
+  font-weight: 700;
 }
 
 /* CATEGORY GRID (INDEX) */
-.category-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:16px;
-  padding:16px;
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 14px;
 }
 
-.category-card{
-  background:white;
-  border-radius:16px;
-  overflow:hidden;
-  text-decoration:none;
-  color:#333;
-  box-shadow:0 6px 14px rgba(0,0,0,.12);
+.category-card {
+  background: white;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #333;
+  text-align: center;
+  overflow: hidden;
 }
 
-.category-card img{
-  width:100%;
-  height:140px;
-  object-fit:cover;
+.category-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
 }
 
-.category-card span{
-  display:block;
-  text-align:center;
-  padding:10px;
-  font-weight:700;
+.category-card span {
+  display: block;
+  padding: 10px;
+  font-weight: 600;
 }
 
 /* PRODUCTS */
-.categories{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-  padding:16px;
+.categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 14px;
 }
 
-@media(max-width:900px){
-  .categories{ grid-template-columns:repeat(2,1fr); }
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
 }
 
-@media(max-width:500px){
-  .categories{ grid-template-columns:1fr; }
+.product-name {
+  font-weight: 600;
+  margin-top: 6px;
 }
 
-.product-card{
-  background:white;
-  padding:12px;
-  border-radius:16px;
-  box-shadow:0 6px 14px rgba(0,0,0,.12);
+.sku {
+  font-size: 12px;
+  opacity: 0.6;
 }
 
-.image-scroll{
-  display:flex;
-  gap:6px;
-  overflow-x:auto;
+/* IMAGE SCROLL */
+.image-scroll {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
 }
 
-.image-scroll img{
-  height:120px;
-  border-radius:10px;
+.image-scroll img {
+  height: 100px;
+  border-radius: 8px;
 }
 
-.product-name{
-  text-align:center;
-  font-weight:700;
-  margin-top:8px;
+/* QTY */
+.qty-control {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 8px 0;
 }
 
-.sku{
-  text-align:center;
-  font-size:11px;
-  opacity:.6;
+.qty-control button {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: #ff6fa5;
+  color: white;
 }
 
-.qty-control{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:8px 0;
-}
-
-.qty-control button{
-  width:28px;
-  height:28px;
-  border:none;
-  border-radius:50%;
-  background:#ff6fa5;
-  color:white;
-}
-
-.add-btn{
-  width:100%;
-  padding:8px;
-  background:#25D366;
-  border:none;
-  border-radius:10px;
-  color:white;
-  font-weight:700;
+/* ADD BUTTON */
+.add-btn {
+  width: 100%;
+  padding: 8px;
+  background: #25D366;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
 }
