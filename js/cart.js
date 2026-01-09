@@ -1,6 +1,6 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-/* + - preview qty */
+/* + - quantity control */
 function changePreviewQty(id, change) {
   const span = document.getElementById(`preview-${id}`);
   if (!span) return;
@@ -28,7 +28,7 @@ function addToCart(id, name, image) {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  alert("Added to cart");
+  alert(`${name} added to cart!`);
 }
 
 /* LOAD CART PAGE */
@@ -44,14 +44,15 @@ function loadCart() {
 
     container.innerHTML += `
       <div class="cart-item">
-        <img src="${item.image}" style="height:60px">
-        <div>${item.name}</div>
-        <div>Qty: ${item.qty}</div>
+        <img src="${item.image}" class="cart-img">
+        <div class="cart-name">${item.name}</div>
+        <div class="cart-qty">Qty: ${item.qty}</div>
       </div>
     `;
   });
 
-  document.getElementById("total-qty").innerText = totalQty;
+  const totalSpan = document.getElementById("total-qty");
+  if (totalSpan) totalSpan.innerText = totalQty;
 }
 
 document.addEventListener("DOMContentLoaded", loadCart);
