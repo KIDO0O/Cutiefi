@@ -70,3 +70,12 @@ function sendToWhatsApp() {
 }
 
 renderCart();
+
+function changePreviewQty(id, change) {
+  const el = document.getElementById(`preview-${id}`);
+  if (!el) return;
+  let qty = parseInt(el.innerText) || 1;
+  qty += change;
+  if (qty < 1) qty = 1;
+  el.innerText = qty;
+}
