@@ -56,3 +56,27 @@ function loadCart() {
 }
 
 document.addEventListener("DOMContentLoaded", loadCart);
+
+function sendToWhatsApp() {
+  let message = "*New Cutiefic Order*%0A%0A";
+
+  const name = document.getElementById("custName").value;
+  const company = document.getElementById("company").value;
+  const phone = document.getElementById("phone").value;
+  const transport = document.getElementById("transport").value;
+
+  message += `Name: ${name}%0A`;
+  message += `Company: ${company}%0A`;
+  message += `Phone: ${phone}%0A`;
+  message += `Transport: ${transport}%0A%0A`;
+
+  Object.values(cart).forEach(item => {
+    message += `• ${item.name}%0A`;
+    message += `  Qty: ${item.qty}%0A%0A`;
+  });
+
+  window.open(
+    `https://wa.me/9020902902?text=${message}`,
+    "_blank"
+  );
+}
