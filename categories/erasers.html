@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Erasers</title>
-<link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <title>Erasers</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
-
 <body>
 
 <header class="header">
-  <a href="../index.html" class="icon-btn back-btn">⬅</a>
+  <a href="../index.html" class="icon-btn">⬅</a>
   <img src="../images/logo.png" class="logo">
-  <a href="../cart.html" class="icon-btn cart-btn">🛒</a>
+  <a href="../cart.html" class="icon-btn">🛒</a>
 </header>
-
-<img src="../images/erasers-hero.jpg" class="hero-img">
 
 <h2 class="page-title">Erasers</h2>
 
 <div class="categories">
 
-  <div class="card">
-    <img src="../images/sample.jpg" class="product-img">
-    <p>Ice Cream Eraser</p>
+  <div class="card product-card">
+    <div class="image-scroll">
+      <img src="../images/eraser1_1.jpg">
+      <img src="../images/eraser1_2.jpg">
+    </div>
+
+    <div class="product-name">Ice Cream Eraser</div>
+    <div class="sku">SKU: 100002</div>
 
     <div class="qty-control">
-      <button onclick="changeQty('1001',-1)">−</button>
-      <span id="qty-1001">1</span>
-      <button onclick="changeQty('1001',1)">+</button>
+      <button onclick="changePreviewQty('100002',-1)">−</button>
+      <span id="preview-100002">1</span>
+      <button onclick="changePreviewQty('100002',1)">+</button>
     </div>
 
     <button class="add-btn"
-      onclick="addToCart('1001','Ice Cream Eraser','images/sample.jpg')">
+      onclick="addToCart(
+        '100002',
+        'Ice Cream Eraser',
+        '../images/eraser1_1.jpg'
+      )">
       Add to Cart
     </button>
   </div>
