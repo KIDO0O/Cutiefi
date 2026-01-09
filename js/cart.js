@@ -97,7 +97,7 @@ function sendToWhatsApp() {
   const isMarketing = nameRaw.includes(SECRET);
   const name = nameRaw.replace(SECRET,"").trim();
 
-  let msg = `*New Cutiefic Order*%0A`;
+  let msg = `New Cutiefic Order%0A`;
   msg += `Name: ${name}%0A`;
   msg += `Company: ${companyName.value}%0A`;
   msg += `Address: ${address.value}%0A`;
