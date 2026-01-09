@@ -5,44 +5,35 @@
   <title>Erasers</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
-
 <body>
 
 <header class="header">
   <a href="../index.html" class="icon-btn">⬅</a>
-  <img src="../images/logo.png" class="logo">
+  <img src="../images/logo.png" class="logo" alt="Cutiefic Logo">
   <a href="../cart.html" class="icon-btn">🛒</a>
 </header>
 
 <h2 class="page-title">Erasers</h2>
 
-<div class="category-grid">
+<div class="categories">
 
-  <div class="product-card">
-    <img src="../images/eraser_1.jpg">
+  <!-- PRODUCT 1 -->
+  <div class="card product-card">
+    <div class="image-scroll">
+      <img src="../images/eraser_1.jpg" alt="Eraser 1">
+      <img src="../images/eraser_2.jpg" alt="Eraser 2">
+    </div>
 
     <div class="product-name">French Fries Eraser</div>
     <div class="sku">SKU: 100001</div>
 
-   <button class="add-btn"
-onclick="addToCart(
-  '100001',
-  'French Fries Eraser',
-  '/images/eraser_1.jpg'
-)">
-<div class="qty-control">
-  <button onclick="changePreviewQty('100001', -1)">−</button>
-  <span id="preview-100001">1</span>
-  <button onclick="changePreviewQty('100001', 1)">+</button>
-</div>
+    <div class="qty-control">
+      <button onclick="changePreviewQty('100001', -1)">−</button>
+      <span id="preview-100001">1</span>
+      <button onclick="changePreviewQty('100001', 1)">+</button>
+    </div>
 
-Add to Cart
-</button>
-
-  </div>
-
-</div>
-
-<script src="../js/cart.js"></script>
-</body>
-</html>
+    <button class="add-btn"
+      onclick="addToCart(
+        '100001',
+        'French Fries Er
