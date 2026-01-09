@@ -1,13 +1,43 @@
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
-const container = document.getElementById("cart-items");
+const CART_KEY="cutieficCart";
 
-if (cart.length === 0) {
-  container.innerHTML = "<p>Your cart is empty</p>";
+function getCart(){
+  return JSON.parse(localStorage.getItem(CART_KEY))||[];
+}
+function saveCart(c){
+  localStorage.setItem(CART_KEY,JSON.stringify(c));
 }
 
-cart.forEach(item => {
-  const div = document.createElement("div");
-  div.className = "cart-item";
-  div.innerText = item;
-  container.appendChild(div);
-});
+function addToCart(sku,name,image){
+  const cart=getCart();
+  const item=cart.find(i=>i.sku===sku);
+  const qty=parseInt(document.getElementById("qty-"+sku).innerText);
+
+  if(item) item.qty+=qty;
+  else cart.push({sku,name,image,qty});
+
+  saveCart(cart);
+  alert("Added to cart");
+}
+
+function changeQty(sku,delta){
+  const el=document.getElementById("qty-"+sku);
+  let q=parseInt(el.innerText)+delta;
+  if(q<1) q=1;
+  el.innerText=q;
+}
+
+function renderCart(){
+  const cart=getCart();
+  const box=document.getElementById("cartItems");
+  if(!box) return;
+
+  box.innerHTML="";
+  cart.forEach(i=>{
+    box.innerHTML+=`
+      <div class="cart-item">
+        <b>${i.name}</b><br>
+        Qty: ${i.qty}
+      </div>`;
+  });
+}
+renderCart();

@@ -1,27 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Erasers</title>
-  <link rel="stylesheet" href="../css/style.css">
+<meta charset="UTF-8">
+<title>Erasers</title>
+<link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
 <header class="header">
   <a href="../index.html" class="icon-btn back-btn">⬅</a>
-  <img src="../images/logo.png" class="logo" alt="Cutiefic Logo">
+  <img src="../images/logo.png" class="logo">
   <a href="../cart.html" class="icon-btn cart-btn">🛒</a>
 </header>
 
-<img src="../images/erasers-hero.jpg" class="hero-img" alt="Erasers">
+<img src="../images/erasers-hero.jpg" class="hero-img">
 
 <h2 class="page-title">Erasers</h2>
 
 <div class="categories">
-  <div class="card">Cute Eraser 1</div>
-  <div class="card">Cute Eraser 2</div>
+
+  <div class="card">
+    <img src="../images/sample.jpg" class="product-img">
+    <p>Ice Cream Eraser</p>
+
+    <div class="qty-control">
+      <button onclick="changeQty('1001',-1)">−</button>
+      <span id="qty-1001">1</span>
+      <button onclick="changeQty('1001',1)">+</button>
+    </div>
+
+    <button class="add-btn"
+      onclick="addToCart('1001','Ice Cream Eraser','images/sample.jpg')">
+      Add to Cart
+    </button>
+  </div>
+
 </div>
 
+<script src="../js/cart.js"></script>
 </body>
 </html>
