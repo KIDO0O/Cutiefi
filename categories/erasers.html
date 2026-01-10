@@ -1,39 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Erasers</title>
-  <link rel="stylesheet" href="../css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erasers - Cutiefic</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">🎀 Cutiefic</a>
+                </div>
+                <a href="../cart.html" class="cart-icon">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
-<header class="header">
-  <a href="../index.html" class="icon-btn">⬅</a>
-  <img src="../images/logo.png" class="logo" alt="Cutiefic Logo">
-  <a href="../cart.html" class="icon-btn">🛒</a>
-</header>
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / <span>Erasers</span>
+            </div>
 
-<h2 class="page-title">Erasers</h2>
+            <section class="category-header">
+                <h2>Cute Erasers Collection</h2>
+                <p>Adorable erasers that make mistakes fun to fix! 🌸</p>
+            </section>
 
-<div class="categories">
+            <section class="products-grid" id="productsGrid"></section>
+        </div>
+    </main>
 
-  <!-- PRODUCT 1 -->
-  <div class="card product-card">
-    <div class="image-scroll">
-      <img src="../images/eraser_1.jpg" alt="Eraser 1">
-      <img src="../images/eraser_2.jpg" alt="Eraser 2">
-    </div>
+    <footer>
+        <div class="container">
+            <p>💕 Made with love by Cutiefic 💕</p>
+        </div>
+    </footer>
 
-    <div class="product-name">French Fries Eraser</div>
-    <div class="sku">SKU: 100001</div>
+    <script src="../js/cart.js"></script>
+    <script>
+        const products = [
+            {
+                id: 'ER001',
+                name: 'Kawaii Animal Erasers Set',
+                sku: 'ER001',
+                price: 299,
+                images: [
+                    'https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop'
+                ]
+            },
+            {
+                id: 'ER002',
+                name: 'Pastel Cloud Erasers',
+                sku: 'ER002',
+                price: 199,
+                images: [
+                    'https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop'
+                ]
+            },
+            {
+                id: 'ER003',
+                name: 'Fruit Shaped Erasers',
+                sku: 'ER003',
+                price: 249,
+                images: [
+                    'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop'
+                ]
+            },
+            {
+                id: 'ER004',
+                name: 'Mini Dessert Erasers',
+                sku: 'ER004',
+                price: 349,
+                images: [
+                    'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop'
+                ]
+            },
+            {
+                id: 'ER005',
+                name: 'Rainbow Star Erasers',
+                sku: 'ER005',
+                price: 279,
+                images: [
+                    'https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop'
+                ]
+            },
+            {
+                id: 'ER006',
+                name: 'Cute Character Erasers',
+                sku: 'ER006',
+                price: 399,
+                images: [
+                    'https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop'
+                ]
+            }
+        ];
 
-    <div class="qty-control">
-      <button onclick="changePreviewQty('100001', -1)">−</button>
-      <span id="preview-100001">1</span>
-      <button onclick="changePreviewQty('100001', 1)">+</button>
-    </div>
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                card.innerHTML = `
+                    <div class="product-gallery" id="gallery-${product.id}">
+                        ${product.images.map((img, idx) => `
+                            <img src="${img}" alt="${product.name}" class="gallery-image ${idx === 0 ? 'active' : ''}">
+                        `).join('')}
+                        <div class="gallery-dots">
+                            ${product.images.map((_, idx) => `
+                                <span class="dot ${idx === 0 ? 'active' : ''}" onclick="showImage('${product.id}', ${idx})"></span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="sku">SKU: ${product.sku}</p>
+                        <p class="price">₹${product.price}</p>
+                        <div class="quantity-selector">
+                            <button onclick="decreaseQty('${product.id}')" class="qty-btn">−</button>
+                            <input type="number" id="qty-${product.id}" value="1" min="1" readonly>
+                            <button onclick="increaseQty('${product.id}')" class="qty-btn">+</button>
+                        </div>
+                        <button onclick="addToCartFromPage('${product.id}')" class="add-to-cart-btn">
+                            Add to Cart 🛒
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+                
+                // Add swipe functionality
+                const gallery = card.querySelector('.product-gallery');
+                let startX = 0;
+                let currentIndex = 0;
+                
+                gallery.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+                
+                gallery.addEventListener('touchend', (e) => {
+                    const endX = e.changedTouches[0].clientX;
+                    const diff = startX - endX;
+                    
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0 && currentIndex < product.images.length - 1) {
+                            currentIndex++;
+                        } else if (diff < 0 && currentIndex > 0) {
+                            currentIndex--;
+                        }
+                        showImage(product.id, currentIndex);
+                    }
+                });
+                
+                // Mouse drag for desktop
+                let isDragging = false;
+                gallery.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startX = e.clientX;
+                });
+                
+                gallery.addEventListener('mouseup', (e) => {
+                    if (isDragging) {
+                        const endX = e.clientX;
+                        const diff = startX - endX;
+                        
+                        if (Math.abs(diff) > 50) {
+                            if (diff > 0 && currentIndex < product.images.length - 1) {
+                                currentIndex++;
+                            } else if (diff < 0 && currentIndex > 0) {
+                                currentIndex--;
+                            }
+                            showImage(product.id, currentIndex);
+                        }
+                    }
+                    isDragging = false;
+                });
+            });
+        }
 
-    <button class="add-btn"
-      onclick="addToCart(
-        '100001',
-        'French Fries Er
+        function showImage(productId, index) {
+            const gallery = document.getElementById(`gallery-${productId}`);
+            const images = gallery.querySelectorAll('.gallery-image');
+            const dots = gallery.querySelectorAll('.dot');
+            
+            images.forEach((img, idx) => {
+                img.classList.toggle('active', idx === index);
+            });
+            
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === index);
+            });
+        }
+
+        function increaseQty(productId) {
+            const input = document.getElementById(`qty-${productId}`);
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decreaseQty(productId) {
+            const input = document.getElementById(`qty-${productId}`);
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function addToCartFromPage(productId) {
+            const product = products.find(p => p.id === productId);
+            const qty = parseInt(document.getElementById(`qty-${productId}`).value);
+            
+            addToCart({
+                id: product.id,
+                name: product.name,
+                sku: product.sku,
+                price: product.price,
+                image: product.images[0],
+                quantity: qty
+            });
+            
+            // Reset quantity
+            document.getElementById(`qty-${productId}`).value = 1;
+            
+            // Show feedback
+            alert(`Added ${qty} x ${product.name} to cart! 🎉`);
+        }
+
+        // Initialize
+        renderProducts();
+        updateCartCount();
+    </script>
+</body>
+</html>

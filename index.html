@@ -1,53 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cutiefic Catalogue</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cutiefic - Cute Stationery</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🎀 Cutiefic</h1>
+                    <p class="tagline">Your Cute Stationery Store</p>
+                </div>
+                <a href="cart.html" class="cart-icon">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
-<header class="header">
-  <img src="images/logo.png" class="logo">
-  <a href="cart.html" class="icon-btn">🛒</a>
-</header>
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h2>Browse Our Collections</h2>
+                <p>Discover adorable stationery that makes every day special! ✨</p>
+            </section>
 
-<h2 class="page-title">Product Categories</h2>
+            <section class="categories-grid">
+                <a href="categories/erasers.html" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=300&fit=crop" alt="Erasers">
+                    </div>
+                    <div class="category-info">
+                        <h3>Erasers</h3>
+                        <p>Cute & functional erasers</p>
+                    </div>
+                </a>
 
-<div class="category-grid">
+                <a href="under-construction.html" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=400&h=300&fit=crop" alt="Notebooks">
+                    </div>
+                    <div class="category-info">
+                        <h3>Notebooks</h3>
+                        <p>Beautiful journals & notebooks</p>
+                    </div>
+                </a>
 
-  <a href="categories/erasers.html" class="category-card">
-    <img src="images/erasers-hero.jpg">
-    <span>Erasers</span>
-  </a>
+                <a href="under-construction.html" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1580306289691-bd1f4e6e105a?w=400&h=300&fit=crop" alt="Pens">
+                    </div>
+                    <div class="category-info">
+                        <h3>Pens</h3>
+                        <p>Colorful writing tools</p>
+                    </div>
+                </a>
 
-  <a href="under-construction.html" class="category-card">
-    <img src="images/bottles-hero.jpg">
-    <span>Bottles</span>
-  </a>
+                <a href="under-construction.html" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1620843002805-05a08cb72f57?w=400&h=300&fit=crop" alt="Stickers">
+                    </div>
+                    <div class="category-info">
+                        <h3>Stickers</h3>
+                        <p>Decorative sticker packs</p>
+                    </div>
+                </a>
 
-  <a href="under-construction.html" class="category-card">
-    <img src="images/toys-hero.jpg">
-    <span>Toys</span>
-  </a>
+                <a href="under-construction.html" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1566305977571-5666677c6e98?w=400&h=300&fit=crop" alt="Washi Tape">
+                    </div>
+                    <div class="category-info">
+                        <h3>Washi Tape</h3>
+                        <p>Pretty decorative tapes</p>
+                    </div>
+                </a>
 
-  <a href="under-construction.html" class="category-card">
-    <img src="images/stationery-hero.jpg">
-    <span>Stationery</span>
-  </a>
+                <a href="under-construction.html" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400&h=300&fit=crop" alt="Accessories">
+                    </div>
+                    <div class="category-info">
+                        <h3>Accessories</h3>
+                        <p>Cute desk accessories</p>
+                    </div>
+                </a>
+            </section>
+        </div>
+    </main>
 
-  <a href="under-construction.html" class="category-card">
-    <img src="images/bags-hero.jpg">
-    <span>Bags</span>
-  </a>
+    <footer>
+        <div class="container">
+            <p>💕 Made with love by Cutiefic 💕</p>
+        </div>
+    </footer>
 
-  <a href="under-construction.html" class="category-card">
-    <img src="images/lamps-hero.jpg">
-    <span>Table Lamps</span>
-  </a>
-
-</div>
-
+    <script src="js/cart.js"></script>
+    <script>
+        updateCartCount();
+    </script>
 </body>
 </html>

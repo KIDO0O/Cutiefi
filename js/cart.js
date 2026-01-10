@@ -1,81 +1,59 @@
-const CART_KEY = "cutieficCart";
+// Cart Management Functions
 
 function getCart() {
-  return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    const cart = localStorage.getItem('cutieficCart');
+    return cart ? JSON.parse(cart) : [];
 }
 
 function saveCart(cart) {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    localStorage.setItem('cutieficCart', JSON.stringify(cart));
 }
 
-function addToCart(sku, name, image) {
-  let cart = getCart();
-  let item = cart.find(i => i.sku === sku);
-
-  if (item) item.qty++;
-  else cart.push({ sku, name, image, qty: 1 });
-
-  saveCart(cart);
-  alert("Added to cart ✅");
+function addToCart(product) {
+    const cart = getCart();
+    const existingItem = cart.find(item => item.id === product.id);
+    
+    if (existingItem) {
+        existingItem.quantity += product.quantity;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            sku: product.sku,
+            price: product.price,
+            image: product.image,
+            quantity: product.quantity
+        });
+    }
+    
+    saveCart(cart);
+    updateCartCount();
 }
 
-function changeQty(i, d) {
-  let cart = getCart();
-  cart[i].qty += d;
-  if (cart[i].qty <= 0) cart.splice(i, 1);
-  saveCart(cart);
-  renderCart();
+function removeFromCart(productId) {
+    let cart = getCart();
+    cart = cart.filter(item => item.id !== productId);
+    saveCart(cart);
+    updateCartCount();
 }
 
-function renderCart() {
-  const box = document.getElementById("cartItems");
-  if (!box) return;
-
-  let cart = getCart();
-  box.innerHTML = "";
-
-  if (!cart.length) {
-    box.innerHTML = "<p>Cart is empty</p>";
-    return;
-  }
-
-  cart.forEach((p, i) => {
-    box.innerHTML += `
-    <div class="cart-item">
-      <img src="${p.image}">
-      <div>
-        <b>${p.name}</b><br>
-        Qty:
-        <button onclick="changeQty(${i},-1)">−</button>
-        ${p.qty}
-        <button onclick="changeQty(${i},1)">+</button>
-      </div>
-    </div>`;
-  });
+function updateCartCount() {
+    const cart = getCart();
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCountElements = document.querySelectorAll('.cart-count');
+    cartCountElements.forEach(element => {
+        element.textContent = totalItems;
+    });
 }
 
-function sendToWhatsApp() {
-  let cart = getCart();
-  if (!cart.length) return alert("Cart empty");
-
-  let msg = "*Cutiefic Order*%0A%0A";
-  cart.forEach(p => {
-    msg += `${p.name} x ${p.qty}%0A`;
-  });
-
-  window.open(
-    "https://wa.me/9020902902?text=" + msg,
-    "_blank"
-  );
+function clearCart() {
+    localStorage.removeItem('cutieficCart');
+    updateCartCount();
 }
 
-renderCart();
-
-function changePreviewQty(id, change) {
-  const el = document.getElementById(`preview-${id}`);
-  if (!el) return;
-  let qty = parseInt(el.innerText) || 1;
-  qty += change;
-  if (qty < 1) qty = 1;
-  el.innerText = qty;
+// Initialize cart count on page load
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+    });
 }
