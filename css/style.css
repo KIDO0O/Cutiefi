@@ -7,11 +7,14 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #ffeef8 0%, #fff5f7 50%, #ffe8f5 100%);
+    background:
+        url("../images/bgpattern.png") repeat,
+        #fff5f9;
     min-height: 100vh;
     color: #5a5a5a;
     line-height: 1.6;
 }
+
 
 .container {
     max-width: 1200px;
