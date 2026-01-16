@@ -14,15 +14,20 @@ function saveCart(cart) {
 function addToCart(product) {
     const cart = getCart();
     const existingItem = cart.find(item => item.id === product.id);
-    
+
     if (existingItem) {
-        // Update quantity if product already exists
         existingItem.quantity += product.quantity;
     } else {
-        // Add new product
-        cart.push(product);
+        cart.push({
+            id: product.id,
+            name: product.name,
+            sku: product.sku,
+            image: product.image, // always stored
+            price: product.price || 0,
+            quantity: product.quantity
+        });
     }
-    
+
     saveCart(cart);
 }
 

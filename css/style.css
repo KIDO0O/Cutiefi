@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #ffeef8 0%, #fff5f7 100%);
+    background: url("../images/pattern.png") repeat;
     min-height: 100vh;
     color: #333;
 }
@@ -20,8 +20,7 @@ body {
 
 /* Header */
 header {
-    background: white;
-    box-shadow: 0 2px 10px rgba(255, 182, 193, 0.3);
+    background: transparent;
     position: sticky;
     top: 0;
     z-index: 100;
