@@ -9,99 +9,53 @@
 <body>
     <header>
         <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <h1>Cutiefic</h1>
-                    <p class="tagline">Your Cute Stationery Store</p>
-                </div>
-                <a href="cart.html" class="cart-icon">
-                    🛒
-                    <span class="cart-count" id="cartCount">0</span>
-                </a>
-            </div>
+            <img src="images/logo.png" alt="Cutiefic Logo" class="logo">
+            <a href="cart.html" class="cart-icon">
+                🛒 <span id="cartCount">0</span>
+            </a>
         </div>
     </header>
 
-    <main>
-        <div class="container">
-            <section class="hero">
-                <h2>Browse Our Collections</h2>
-                <p>Discover adorable stationery that makes every day special! ✨</p>
-            </section>
+    <main class="container">
+        <h1>Browse Our Collections</h1>
+        
+        <div class="categories-grid">
+            <a href="categories/erasers.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=300&fit=crop" alt="Erasers">
+                <h3>Erasers</h3>
+            </a>
 
-            <section class="categories-grid">
-                <a href="categories/erasers.html" class="category-card">
-                    <div class="category-image">
-                        <img src="images/eraser_1.jpg" alt="Erasers">
-                    </div>
-                    <div class="category-info">
-                        <h3>Erasers</h3> 
-                        <p>Cute & functional erasers</p>
-                    </div>
-                </a>
+            <a href="under-construction.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=400&h=300&fit=crop" alt="Notebooks">
+                <h3>Notebooks</h3>
+            </a>
 
-                <a href="under-construction.html" class="category-card">
-                    <div class="category-image">
-                        <img src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=400&h=300&fit=crop" alt="Notebooks">
-                    </div>
-                    <div class="category-info">
-                        <h3>Notebooks</h3>
-                        <p>Beautiful journals & notebooks</p>
-                    </div>
-                </a>
+            <a href="under-construction.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1580306289691-bd1f4e6e105a?w=400&h=300&fit=crop" alt="Pens">
+                <h3>Pens</h3>
+            </a>
 
-                <a href="under-construction.html" class="category-card">
-                    <div class="category-image">
-                        <img src="https://images.unsplash.com/photo-1580306289691-bd1f4e6e105a?w=400&h=300&fit=crop" alt="Pens">
-                    </div>
-                    <div class="category-info">
-                        <h3>Pens</h3>
-                        <p>Colorful writing tools</p>
-                    </div>
-                </a>
+            <a href="under-construction.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1620843002805-05a08cb72f57?w=400&h=300&fit=crop" alt="Stickers">
+                <h3>Stickers</h3>
+            </a>
 
-                <a href="under-construction.html" class="category-card">
-                    <div class="category-image">
-                        <img src="https://images.unsplash.com/photo-1620843002805-05a08cb72f57?w=400&h=300&fit=crop" alt="Stickers">
-                    </div>
-                    <div class="category-info">
-                        <h3>Stickers</h3>
-                        <p>Decorative sticker packs</p>
-                    </div>
-                </a>
+            <a href="under-construction.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1566305977571-5666677c6e98?w=400&h=300&fit=crop" alt="Washi Tape">
+                <h3>Washi Tape</h3>
+            </a>
 
-                <a href="under-construction.html" class="category-card">
-                    <div class="category-image">
-                        <img src="https://images.unsplash.com/photo-1566305977571-5666677c6e98?w=400&h=300&fit=crop" alt="Washi Tape">
-                    </div>
-                    <div class="category-info">
-                        <h3>Washi Tape</h3>
-                        <p>Pretty decorative tapes</p>
-                    </div>
-                </a>
-
-                <a href="under-construction.html" class="category-card">
-                    <div class="category-image">
-                        <img src="https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400&h=300&fit=crop" alt="Accessories">
-                    </div>
-                    <div class="category-info">
-                        <h3>Accessories</h3>
-                        <p>Cute desk accessories</p>
-                    </div>
-                </a>
-            </section>
+            <a href="under-construction.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400&h=300&fit=crop" alt="Accessories">
+                <h3>Accessories</h3>
+            </a>
         </div>
     </main>
 
     <footer>
-        <div class="container">
-            <p>💕 Made with love by Cutiefic 💕</p>
-        </div>
+        <p>💕 Made with love by Cutiefic 💕</p>
     </footer>
 
     <script src="js/cart.js"></script>
-    <script>
-        updateCartCount();
-    </script>
 </body>
 </html>
