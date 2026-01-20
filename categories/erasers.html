@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <div class="logo-container">
+        <a href="../index.html">
+            <img src="../images/logo.png" alt="Cutiefic Logo" class="main-logo">
+        </a>
+    </div>
+
     <header>
         <div class="container">
-            <a href="../index.html">
-                <img src="../images/logo.png" alt="Cutiefic Logo" class="logo">
-            </a>
             <a href="../cart.html" class="cart-icon">
                 🛒 <span id="cartCount">0</span>
             </a>
@@ -25,153 +28,7 @@
 
         <h1>Cute Erasers Collection</h1>
 
-        <div class="products-grid">
-            
-            <!-- PRODUCT 1 - COPY THIS BLOCK TO ADD NEW PRODUCTS -->
-            <div class="product-card" 
-                 data-id="ER001" 
-                 data-name="Kawaii Animal Erasers Set" 
-                 data-sku="ER001"
-                 data-price="299">
-                <div class="product-gallery">
-                    <img src="https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop" alt="Kawaii Animal Erasers Set" class="active">
-                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop" alt="Kawaii Animal Erasers Set">
-                    <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop" alt="Kawaii Animal Erasers Set">
-                    <div class="gallery-dots"></div>
-                </div>
-                <div class="product-info">
-                    <h3>Kawaii Animal Erasers Set</h3>
-                    <p class="sku">SKU: ER001</p>
-                    <div class="quantity-control">
-                        <button class="qty-btn minus">−</button>
-                        <input type="number" value="1" min="1" readonly>
-                        <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart">Add to Cart 🛒</button>
-                </div>
-            </div>
-
-            <!-- PRODUCT 2 -->
-            <div class="product-card" 
-                 data-id="ER002" 
-                 data-name="Pastel Cloud Erasers" 
-                 data-sku="ER002"
-                 data-price="199">
-                <div class="product-gallery">
-                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop" alt="Pastel Cloud Erasers" class="active">
-                    <img src="https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop" alt="Pastel Cloud Erasers">
-                    <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop" alt="Pastel Cloud Erasers">
-                    <div class="gallery-dots"></div>
-                </div>
-                <div class="product-info">
-                    <h3>Pastel Cloud Erasers</h3>
-                    <p class="sku">SKU: ER002</p>
-                    <div class="quantity-control">
-                        <button class="qty-btn minus">−</button>
-                        <input type="number" value="1" min="1" readonly>
-                        <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart">Add to Cart 🛒</button>
-                </div>
-            </div>
-
-            <!-- PRODUCT 3 -->
-            <div class="product-card" 
-                 data-id="ER003" 
-                 data-name="Fruit Shaped Erasers" 
-                 data-sku="ER003"
-                 data-price="249">
-                <div class="product-gallery">
-                    <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop" alt="Fruit Shaped Erasers" class="active">
-                    <img src="https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop" alt="Fruit Shaped Erasers">
-                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop" alt="Fruit Shaped Erasers">
-                    <div class="gallery-dots"></div>
-                </div>
-                <div class="product-info">
-                    <h3>Fruit Shaped Erasers</h3>
-                    <p class="sku">SKU: ER003</p>
-                    <div class="quantity-control">
-                        <button class="qty-btn minus">−</button>
-                        <input type="number" value="1" min="1" readonly>
-                        <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart">Add to Cart 🛒</button>
-                </div>
-            </div>
-
-            <!-- PRODUCT 4 -->
-            <div class="product-card" 
-                 data-id="ER004" 
-                 data-name="Mini Dessert Erasers" 
-                 data-sku="ER004"
-                 data-price="349">
-                <div class="product-gallery">
-                    <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop" alt="Mini Dessert Erasers" class="active">
-                    <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop" alt="Mini Dessert Erasers">
-                    <img src="https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop" alt="Mini Dessert Erasers">
-                    <div class="gallery-dots"></div>
-                </div>
-                <div class="product-info">
-                    <h3>Mini Dessert Erasers</h3>
-                    <p class="sku">SKU: ER004</p>
-                    <div class="quantity-control">
-                        <button class="qty-btn minus">−</button>
-                        <input type="number" value="1" min="1" readonly>
-                        <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart">Add to Cart 🛒</button>
-                </div>
-            </div>
-
-            <!-- PRODUCT 5 -->
-            <div class="product-card" 
-                 data-id="ER005" 
-                 data-name="Rainbow Star Erasers" 
-                 data-sku="ER005"
-                 data-price="279">
-                <div class="product-gallery">
-                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop" alt="Rainbow Star Erasers" class="active">
-                    <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop" alt="Rainbow Star Erasers">
-                    <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop" alt="Rainbow Star Erasers">
-                    <div class="gallery-dots"></div>
-                </div>
-                <div class="product-info">
-                    <h3>Rainbow Star Erasers</h3>
-                    <p class="sku">SKU: ER005</p>
-                    <div class="quantity-control">
-                        <button class="qty-btn minus">−</button>
-                        <input type="number" value="1" min="1" readonly>
-                        <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart">Add to Cart 🛒</button>
-                </div>
-            </div>
-
-            <!-- PRODUCT 6 -->
-            <div class="product-card" 
-                 data-id="ER006" 
-                 data-name="Cute Character Erasers" 
-                 data-sku="ER006"
-                 data-price="399">
-                <div class="product-gallery">
-                    <img src="https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop" alt="Cute Character Erasers" class="active">
-                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop" alt="Cute Character Erasers">
-                    <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop" alt="Cute Character Erasers">
-                    <div class="gallery-dots"></div>
-                </div>
-                <div class="product-info">
-                    <h3>Cute Character Erasers</h3>
-                    <p class="sku">SKU: ER006</p>
-                    <div class="quantity-control">
-                        <button class="qty-btn minus">−</button>
-                        <input type="number" value="1" min="1" readonly>
-                        <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart">Add to Cart 🛒</button>
-                </div>
-            </div>
-
-        </div>
+        <div class="products-grid" id="productsGrid"></div>
     </main>
 
     <footer>
@@ -180,8 +37,114 @@
 
     <script src="../js/cart.js"></script>
     <script>
-        // Initialize gallery dots and swipe for all products
-        document.querySelectorAll('.product-card').forEach(card => {
+        // 📦 PRODUCTS DATA - To add new products, just copy-paste an object here
+        const products = [
+            {
+                id: "ER001",
+                name: "Kawaii Animal Erasers Set",
+                sku: "ER001",
+                images: [
+                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop"
+                ]
+            },
+            {
+                id: "ER002",
+                name: "Pastel Cloud Erasers",
+                sku: "ER002",
+                images: [
+                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop"
+                ]
+            },
+            {
+                id: "ER003",
+                name: "Fruit Shaped Erasers",
+                sku: "ER003",
+                images: [
+                    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop"
+                ]
+            },
+            {
+                id: "ER004",
+                name: "Mini Dessert Erasers",
+                sku: "ER004",
+                images: [
+                    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop"
+                ]
+            },
+            {
+                id: "ER005",
+                name: "Rainbow Star Erasers",
+                sku: "ER005",
+                images: [
+                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop"
+                ]
+            },
+            {
+                id: "ER006",
+                name: "Cute Character Erasers",
+                sku: "ER006",
+                images: [
+                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop"
+                ]
+            }
+        ];
+
+        // Render all products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                // Create gallery HTML
+                const galleryHTML = product.images.map((img, idx) => 
+                    `<img src="${img}" alt="${product.name}" class="${idx === 0 ? 'active' : ''}">`
+                ).join('');
+                
+                card.innerHTML = `
+                    <div class="product-gallery">
+                        ${galleryHTML}
+                        <div class="gallery-dots"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="sku">SKU: ${product.sku}</p>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">−</button>
+                            <input type="number" value="1" min="1" readonly>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Add to Cart 🛒</button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+                
+                // Initialize gallery
+                initGallery(card, product);
+                
+                // Initialize quantity controls
+                initQuantityControls(card);
+                
+                // Initialize add to cart
+                initAddToCart(card, product);
+            });
+        }
+
+        function initGallery(card, product) {
             const gallery = card.querySelector('.product-gallery');
             const images = gallery.querySelectorAll('img');
             const dotsContainer = gallery.querySelector('.gallery-dots');
@@ -217,31 +180,43 @@
                     dot.classList.toggle('active', i === index);
                 });
             }
+        }
 
-            // Quantity controls
+        function initQuantityControls(card) {
             const qtyInput = card.querySelector('input[type="number"]');
-            card.querySelector('.minus').onclick = () => {
+            const minusBtn = card.querySelector('.minus');
+            const plusBtn = card.querySelector('.plus');
+            
+            minusBtn.onclick = () => {
                 if (qtyInput.value > 1) qtyInput.value--;
             };
-            card.querySelector('.plus').onclick = () => {
+            
+            plusBtn.onclick = () => {
                 qtyInput.value++;
             };
+        }
 
-            // Add to cart
-            card.querySelector('.add-to-cart').onclick = () => {
-                const product = {
-                    id: card.dataset.id,
-                    name: card.dataset.name,
-                    sku: card.dataset.sku,
-                    price: parseInt(card.dataset.price),
-                    image: card.querySelector('img').src,
+        function initAddToCart(card, product) {
+            const addBtn = card.querySelector('.add-to-cart');
+            const qtyInput = card.querySelector('input[type="number"]');
+            
+            addBtn.onclick = () => {
+                const productData = {
+                    id: product.id,
+                    name: product.name,
+                    sku: product.sku,
+                    image: product.images[0],
                     quantity: parseInt(qtyInput.value)
                 };
-                addToCart(product);
+                
+                addToCart(productData);
                 qtyInput.value = 1;
-                alert(`Added ${product.quantity}x ${product.name} to cart! 🎉`);
+                alert(`Added ${productData.quantity}x ${product.name} to cart! 🎉`);
             };
-        });
+        }
+
+        // Initialize
+        renderProducts();
     </script>
 </body>
 </html>

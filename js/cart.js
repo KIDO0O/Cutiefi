@@ -14,20 +14,13 @@ function saveCart(cart) {
 function addToCart(product) {
     const cart = getCart();
     const existingItem = cart.find(item => item.id === product.id);
-
+    
     if (existingItem) {
         existingItem.quantity += product.quantity;
     } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            sku: product.sku,
-            image: product.image, // always stored
-            price: product.price || 0,
-            quantity: product.quantity
-        });
+        cart.push(product);
     }
-
+    
     saveCart(cart);
 }
 
@@ -39,6 +32,21 @@ function updateCartCount() {
     if (countElement) {
         countElement.textContent = totalItems;
     }
+}
+
+// Check if secret marketing code is active
+function isMarketingMode() {
+    const code = localStorage.getItem('marketingCode');
+    return code === 'CUTIE2025';
+}
+
+// Set marketing code
+function setMarketingCode(code) {
+    if (code === 'CUTIE2025') {
+        localStorage.setItem('marketingCode', code);
+        return true;
+    }
+    return false;
 }
 
 // Initialize cart count on page load

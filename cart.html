@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="logo-container">
+        <a href="index.html">
+            <img src="images/logo.png" alt="Cutiefic Logo" class="main-logo">
+        </a>
+    </div>
+
     <header>
         <div class="container">
-            <a href="index.html">
-                <img src="images/logo.png" alt="Cutiefic Logo" class="logo">
-            </a>
             <a href="cart.html" class="cart-icon">
                 🛒 <span id="cartCount">0</span>
             </a>
@@ -33,10 +36,6 @@
         </div>
 
         <div id="cartSummary" style="display: none;">
-            <div class="cart-total">
-                <strong>Grand Total:</strong>
-                <strong id="grandTotal">₹0</strong>
-            </div>
             <button onclick="openCheckout()" class="btn checkout-btn">Proceed to Checkout 💳</button>
         </div>
     </main>
@@ -51,6 +50,13 @@
                 <input type="tel" id="customerPhone" placeholder="Phone Number *" required>
                 <textarea id="customerAddress" placeholder="Delivery Address *" required></textarea>
                 <input type="text" id="transportName" placeholder="Transport Name (Optional)">
+                
+                <div id="marketingPriceSection" style="display: none;">
+                    <input type="password" id="marketingCode" placeholder="Marketing Code">
+                    <button type="button" onclick="unlockPricing()" class="btn-secondary">Unlock Pricing</button>
+                    <div id="priceInputs" style="display: none;"></div>
+                </div>
+                
                 <button type="submit" class="btn">Send Order via WhatsApp 💬</button>
             </form>
         </div>
@@ -95,9 +101,6 @@
                     </div>
                 </div>
             `).join('');
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            document.getElementById('grandTotal').textContent = '₹' + total;
         }
 
         function changeQty(id, change) {
@@ -123,11 +126,32 @@
         }
 
         function openCheckout() {
+            const marketingSection = document.getElementById('marketingPriceSection');
+            marketingSection.style.display = 'block';
             document.getElementById('checkoutModal').style.display = 'flex';
         }
 
         function closeCheckout() {
             document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        function unlockPricing() {
+            const code = document.getElementById('marketingCode').value;
+            if (setMarketingCode(code)) {
+                const cart = getCart();
+                const priceInputsDiv = document.getElementById('priceInputs');
+                priceInputsDiv.style.display = 'block';
+                priceInputsDiv.innerHTML = '<h3 style="margin-top: 20px;">Set Prices:</h3>' + 
+                    cart.map(item => `
+                        <div style="margin: 10px 0;">
+                            <label>${item.name} (${item.sku}):</label>
+                            <input type="number" id="price-${item.id}" placeholder="Price per unit" min="0" style="margin-top: 5px;">
+                        </div>
+                    `).join('');
+                alert('Marketing mode activated! You can now set prices.');
+            } else {
+                alert('Invalid marketing code.');
+            }
         }
 
         document.getElementById('checkoutForm').onsubmit = function(e) {
@@ -138,20 +162,42 @@
             const address = document.getElementById('customerAddress').value;
             const transport = document.getElementById('transportName').value;
 
-            let msg = '🎀 *New Order from Cutiefic*\n\n';
-            msg += '📦 *Order Details:*\n';
-            cart.forEach((item, i) => {
-                msg += `\n${i + 1}. ${item.name}\n`;
-                msg += `   SKU: ${item.sku}\n`;
-                msg += `   Quantity: ${item.quantity}\n`;
-            });
-            msg += '\n👤 *Customer Details:*\n';
-            msg += `Name: ${name}\n`;
-            msg += `Phone: ${phone}\n`;
-            msg += `Address: ${address}\n`;
-            if (transport) msg += `Transport: ${transport}\n`;
+            let msg = '*New Order - Cutiefic*\n\n';
+            msg += '*Customer Details*\n';
+            msg += 'Name: ' + name + '\n';
+            msg += 'Phone: ' + phone + '\n';
+            msg += 'Address: ' + address + '\n';
+            if (transport) {
+                msg += 'Transport: ' + transport + '\n';
+            }
+            msg += '\n*Order Details*\n';
 
-            window.open('https://wa.me/919020902902?text=' + encodeURIComponent(msg), '_blank');
+            // Check if marketing mode is active and prices are set
+            const marketingMode = isMarketingMode();
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                msg += '• ' + item.name + ' × ' + item.quantity;
+                
+                if (marketingMode) {
+                    const priceInput = document.getElementById('price-' + item.id);
+                    if (priceInput && priceInput.value) {
+                        const price = parseFloat(priceInput.value);
+                        const itemTotal = price * item.quantity;
+                        totalPrice += itemTotal;
+                        msg += ' - Rs.' + itemTotal;
+                    }
+                }
+                
+                msg += '\n';
+            });
+
+            if (marketingMode && totalPrice > 0) {
+                msg += '\n*Total: Rs.' + totalPrice + '*';
+            }
+
+            const whatsappUrl = 'https://wa.me/919020902902?text=' + encodeURIComponent(msg);
+            window.open(whatsappUrl, '_blank');
             closeCheckout();
         };
 
