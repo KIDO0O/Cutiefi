@@ -82,4 +82,4 @@ function setMarketingCode(code) {
 function updateCartCount() {
   const cart = getCart();
   const total = cart.reduce((s, i) => s + i.quantity, 0);
-  const el = document
+  const el = document}

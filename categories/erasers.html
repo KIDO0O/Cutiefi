@@ -1,222 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erasers - Cutiefic</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erasers - Cutiefic</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
-    <div class="logo-container">
-        <a href="../index.html">
-            <img src="../images/logo.png" alt="Cutiefic Logo" class="main-logo">
-        </a>
+
+  <!-- LOGO -->
+  <div class="logo-container">
+    <a href="../index.html">
+      <img src="../images/logo.png" alt="Cutiefic Logo" class="main-logo">
+    </a>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <a href="../cart.html" class="cart-icon">
+        🛒 <span id="cartCount">0</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> / Erasers
     </div>
 
-    <header>
-        <div class="container">
-            <a href="../cart.html" class="cart-icon">
-                🛒 <span id="cartCount">0</span>
-            </a>
-        </div>
-    </header>
+    <h1>Cute Erasers Collection</h1>
 
-    <main class="container">
-        <div class="breadcrumb">
-            <a href="../index.html">Home</a> / Erasers
-        </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
 
-        <h1>Cute Erasers Collection</h1>
+  <footer>
+    <p>💕 Made with love by Cutiefic 💕</p>
+  </footer>
 
-        <div class="products-grid" id="productsGrid"></div>
-    </main>
+  <!-- CART CORE -->
+  <script src="../js/cart.js"></script>
 
-    <footer>
-        <p>💕 Made with love by Cutiefic 💕</p>
-    </footer>
+  <script>
+    const products = [
+      {
+        id: "ER001",
+        name: "Kawaii Animal Erasers Set",
+        images: [
+          "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400"
+        ]
+      },
+      {
+        id: "ER002",
+        name: "Pastel Cloud Erasers",
+        images: [
+          "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400"
+        ]
+      },
+      {
+        id: "ER003",
+        name: "Fruit Shaped Erasers",
+        images: [
+          "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400"
+        ]
+      }
+    ];
 
-    <script src="../js/cart.js"></script>
-    <script>
-        // 📦 PRODUCTS DATA - To add new products, just copy-paste an object here
-        const products = [
-            {
-                id: "ER001",
-                name: "Kawaii Animal Erasers Set",
-                sku: "ER001",
-                images: [
-                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop"
-                ]
-            },
-            {
-                id: "ER002",
-                name: "Pastel Cloud Erasers",
-                sku: "ER002",
-                images: [
-                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop"
-                ]
-            },
-            {
-                id: "ER003",
-                name: "Fruit Shaped Erasers",
-                sku: "ER003",
-                images: [
-                    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop"
-                ]
-            },
-            {
-                id: "ER004",
-                name: "Mini Dessert Erasers",
-                sku: "ER004",
-                images: [
-                    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop"
-                ]
-            },
-            {
-                id: "ER005",
-                name: "Rainbow Star Erasers",
-                sku: "ER005",
-                images: [
-                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&h=400&fit=crop"
-                ]
-            },
-            {
-                id: "ER006",
-                name: "Cute Character Erasers",
-                sku: "ER006",
-                images: [
-                    "https://images.unsplash.com/photo-1587058955111-d95625d2fc44?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?w=400&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&h=400&fit=crop"
-                ]
-            }
-        ];
+    function renderProducts() {
+      const grid = document.getElementById("productsGrid");
 
-        // Render all products
-        function renderProducts() {
-            const grid = document.getElementById('productsGrid');
-            
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                
-                // Create gallery HTML
-                const galleryHTML = product.images.map((img, idx) => 
-                    `<img src="${img}" alt="${product.name}" class="${idx === 0 ? 'active' : ''}">`
-                ).join('');
-                
-                card.innerHTML = `
-                    <div class="product-gallery">
-                        ${galleryHTML}
-                        <div class="gallery-dots"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p class="sku">SKU: ${product.sku}</p>
-                        <div class="quantity-control">
-                            <button class="qty-btn minus">−</button>
-                            <input type="number" value="1" min="1" readonly>
-                            <button class="qty-btn plus">+</button>
-                        </div>
-                        <button class="add-to-cart">Add to Cart 🛒</button>
-                    </div>
-                `;
-                
-                grid.appendChild(card);
-                
-                // Initialize gallery
-                initGallery(card, product);
-                
-                // Initialize quantity controls
-                initQuantityControls(card);
-                
-                // Initialize add to cart
-                initAddToCart(card, product);
-            });
-        }
+      products.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
 
-        function initGallery(card, product) {
-            const gallery = card.querySelector('.product-gallery');
-            const images = gallery.querySelectorAll('img');
-            const dotsContainer = gallery.querySelector('.gallery-dots');
-            
-            // Create dots
-            images.forEach((_, index) => {
-                const dot = document.createElement('span');
-                dot.className = 'dot' + (index === 0 ? ' active' : '');
-                dot.onclick = () => showImage(gallery, index);
-                dotsContainer.appendChild(dot);
-            });
+        card.innerHTML = `
+          <img src="${product.images[0]}" alt="${product.name}">
+          <h3>${product.name}</h3>
 
-            // Swipe functionality
-            let startX = 0;
-            let currentIndex = 0;
+          <div class="quantity-control">
+            <button class="qty-btn minus">−</button>
+            <input type="number" value="1" min="1" readonly>
+            <button class="qty-btn plus">+</button>
+          </div>
 
-            gallery.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-            gallery.addEventListener('touchend', e => {
-                const diff = startX - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0 && currentIndex < images.length - 1) currentIndex++;
-                    else if (diff < 0 && currentIndex > 0) currentIndex--;
-                    showImage(gallery, currentIndex);
-                }
-            });
+          <button class="add-to-cart">Add to Cart 🛒</button>
+        `;
 
-            function showImage(gallery, index) {
-                currentIndex = index;
-                gallery.querySelectorAll('img').forEach((img, i) => {
-                    img.classList.toggle('active', i === index);
-                });
-                gallery.querySelectorAll('.dot').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
-                });
-            }
-        }
+        grid.appendChild(card);
 
-        function initQuantityControls(card) {
-            const qtyInput = card.querySelector('input[type="number"]');
-            const minusBtn = card.querySelector('.minus');
-            const plusBtn = card.querySelector('.plus');
-            
-            minusBtn.onclick = () => {
-                if (qtyInput.value > 1) qtyInput.value--;
-            };
-            
-            plusBtn.onclick = () => {
-                qtyInput.value++;
-            };
-        }
+        const qtyInput = card.querySelector("input");
+        card.querySelector(".minus").onclick = () => {
+          if (qtyInput.value > 1) qtyInput.value--;
+        };
+        card.querySelector(".plus").onclick = () => {
+          qtyInput.value++;
+        };
 
-        function initAddToCart(card, product) {
-            const addBtn = card.querySelector('.add-to-cart');
-            const qtyInput = card.querySelector('input[type="number"]');
-            
-            addBtn.onclick = () => {
-                const productData = {
-                    id: product.id,
-                    name: product.name,
-                    sku: product.sku,
-                    image: product.images[0],
-                    quantity: parseInt(qtyInput.value)
-                };
-                
-                addToCart(productData);
-                qtyInput.value = 1;
-                alert(`Added ${productData.quantity}x ${product.name} to cart! 🎉`);
-            };
-        }
+        card.querySelector(".add-to-cart").onclick = () => {
+          addToCart({
+            id: product.id,
+            name: product.name,
+            image: product.images[0],
+            quantity: parseInt(qtyInput.value)
+          });
 
-        // Initialize
-        renderProducts();
-    </script>
+          qtyInput.value = 1;
+          alert("Added to cart ✅");
+        };
+      });
+    }
+
+    renderProducts();
+    updateCartCount();
+  </script>
+
 </body>
 </html>
