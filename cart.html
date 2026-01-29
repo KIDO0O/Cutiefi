@@ -1,80 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart - Cutiefic</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Cart – Cutiefic</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: url("images/pattern.png"); font-family: sans-serif; }
+    .cart-item { display:flex; gap:15px; background:#fff; padding:15px; border-radius:10px; margin-bottom:15px; }
+    .cart-item img { width:80px; height:80px; object-fit:cover; border-radius:8px; }
+    .qty { display:flex; gap:10px; align-items:center; }
+    button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; }
+    .price-input { margin-top:8px; width:100px; }
+    .box { background:#fff; padding:20px; border-radius:12px; margin-top:20px; }
+  </style>
 </head>
+
 <body>
-    <div class="logo-container">
-        <a href="index.html">
-            <img src="images/logo.png" alt="Cutiefic Logo" class="main-logo">
-        </a>
-    </div>
 
-    <header>
-        <div class="container">
-            <a href="cart.html" class="cart-icon">
-                🛒 <span id="cartCount">0</span>
-            </a>
-        </div>
-    </header>
+<div style="text-align:center;margin:20px;">
+  <img src="images/logo.png" style="height:70px">
+</div>
 
-    <main class="container">
-        <div class="breadcrumb">
-            <a href="index.html">Home</a> / Shopping Cart
-        </div>
+<div class="box">
+  🛒 Cart Items (<span id="cartCount">0</span>)
+</div>
 
-        <h1>Your Shopping Cart 🛍️</h1>
+<div id="cartItems" class="box"></div>
 
-        <div id="cartItems"></div>
+<!-- MARKETING UNLOCK -->
+<div class="box">
+  <h3>Marketing Access</h3>
+  <input type="password" id="marketingCode" placeholder="Enter code">
+  <button onclick="unlockMarketing(document.getElementById('marketingCode').value)">
+    Unlock
+  </button>
+</div>
 
-        <div id="emptyCart" style="display: none;">
-            <p>Your cart is empty! 😢</p>
-            <a href="index.html" class="btn">Start Shopping</a>
-        </div>
+<!-- CHECKOUT (INSIDE CART) -->
+<div class="box">
+  <h3>Checkout</h3>
+  <input id="name" placeholder="Customer Name"><br><br>
+  <input id="phone" placeholder="Phone"><br><br>
+  <textarea id="address" placeholder="Address"></textarea><br><br>
+  <button onclick="sendWhatsApp()">Send Order on WhatsApp</button>
+</div>
 
-        <div id="cartSummary" style="display: none;">
-            <button onclick="openCheckout()" class="btn checkout-btn">Proceed to Checkout 💳</button>
-        </div>
-    </main>
-
-    <!-- Checkout Modal -->
-    <div id="checkoutModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCheckout()">&times;</span>
-            <h2>Checkout Details</h2>
-            <form id="checkoutForm">
-                <input type="text" id="customerName" placeholder="Full Name *" required>
-                <input type="tel" id="customerPhone" placeholder="Phone Number *" required>
-                <textarea id="customerAddress" placeholder="Delivery Address *" required></textarea>
-                <input type="text" id="transportName" placeholder="Transport Name (Optional)">
-                
-                <div id="marketingPriceSection" style="display: none;">
-                    <input type="password" id="marketingCode" placeholder="Marketing Code">
-                    <button type="button" onclick="unlockPricing()" class="btn-secondary">Unlock Pricing</button>
-                    <div id="priceInputs" style="display: none;"></div>
-                </div>
-                
-                <button type="submit" class="btn">Send Order via WhatsApp 💬</button>
-            </form>
-        </div>
-    </div>
-
-    <footer>
-        <p>💕 Made with love by Cutiefic 💕</p>
-    </footer>
-
-    <script src="js/cart.js"></script>
+<script src="js/cart.js"></script>
 <script>
 function renderCart() {
   const cart = getCart();
-  const box = document.getElementById('cartItems');
-  box.innerHTML = '';
+  const box = document.getElementById("cartItems");
+  box.innerHTML = "";
 
   if (!cart.length) {
-    box.innerHTML = '<p>Your cart is empty 😢</p>';
+    box.innerHTML = "<p>Cart is empty</p>";
     return;
   }
 
@@ -85,41 +64,51 @@ function renderCart() {
       <div class="cart-item">
         <img src="${item.image}">
         <div>
-          <h3>${item.name}</h3>
+          <b>${item.name}</b>
 
-          <div class="quantity-control">
-            <button onclick="changeQty('${item.id}', -1)">−</button>
-            <span>${item.quantity}</span>
-            <button onclick="changeQty('${item.id}', 1)">+</button>
+          <div class="qty">
+            <button onclick="changeQty('${item.id}',-1)">−</button>
+            ${item.quantity}
+            <button onclick="changeQty('${item.id}',1)">+</button>
           </div>
 
           ${marketing ? `
-            <input
+            <input class="price-input"
               type="number"
               placeholder="Price"
-              value="${item.price || ''}"
-              oninput="updatePrice('${item.id}', this.value)"
-            >
-          ` : ''}
+              value="${item.price || ""}"
+              oninput="updatePrice('${item.id}',this.value)">
+          ` : ""}
         </div>
-
-        <button onclick="removeItem('${item.id}')">🗑</button>
       </div>
     `;
   });
 }
 
-function updatePrice(id, value) {
+function sendWhatsApp() {
   const cart = getCart();
-  const item = cart.find(i => i.id === id);
-  if (!item) return;
-  item.price = Number(value) || 0;
-  saveCart(cart);
-}
+  if (!cart.length) return alert("Cart empty");
 
-function unlockMarketing() {
-  const code = document.getElementById('marketingCodeInput').value;
-  unlockMarketingMode(code);
+  let msg = "*New Cutiefic Order*\n\n";
+  msg += "*Customer Details*\n";
+  msg += "Name: " + name.value + "\n";
+  msg += "Phone: " + phone.value + "\n";
+  msg += "Address: " + address.value + "\n\n";
+  msg += "*Items*\n";
+
+  let total = 0;
+  cart.forEach(i => {
+    msg += `• ${i.name} x${i.quantity}`;
+    if (isMarketingUnlocked() && i.price) {
+      msg += ` = ₹${i.price * i.quantity}`;
+      total += i.price * i.quantity;
+    }
+    msg += "\n";
+  });
+
+  if (total) msg += `\n*Total: ₹${total}*`;
+
+  window.open("https://wa.me/919020902902?text=" + encodeURIComponent(msg));
 }
 
 renderCart();
