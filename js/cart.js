@@ -1,12 +1,12 @@
 /* =========================
-   CART CORE (NO GHOST BUGS)
+   CUTIEFIC CART (STABLE)
    ========================= */
 
 const CART_KEY = 'cutieficCart';
 const MARKETING_KEY = 'marketingCode';
 const MARKETING_SECRET = 'CUTIE2025';
 
-/* ---------- Storage helpers ---------- */
+/* ---------- Storage ---------- */
 function getCart() {
   try {
     const cart = JSON.parse(localStorage.getItem(CART_KEY));
@@ -21,7 +21,7 @@ function saveCart(cart) {
   updateCartCount();
 }
 
-/* ---------- Cart actions ---------- */
+/* ---------- Cart Actions ---------- */
 function addToCart(product) {
   if (!product || !product.id) return;
 
@@ -44,7 +44,7 @@ function addToCart(product) {
 }
 
 function removeFromCart(id) {
-  const cart = getCart().filter(item => item.id !== id);
+  const cart = getCart().filter(i => i.id !== id);
   saveCart(cart);
   renderCart();
 }
@@ -64,22 +64,96 @@ function changeQty(id, delta) {
   renderCart();
 }
 
-/* ---------- Marketing mode ---------- */
+/* ---------- Marketing Mode ---------- */
 function isMarketingMode() {
   return localStorage.getItem(MARKETING_KEY) === MARKETING_SECRET;
 }
 
-function setMarketingCode(code) {
-  if (code === MARKETING_SECRET) {
-    localStorage.setItem(MARKETING_KEY, code);
+function unlockMarketing() {
+  const input = document.getElementById('marketingCodeInput');
+  if (!input) return;
+
+  if (input.value.trim() === MARKETING_SECRET) {
+    localStorage.setItem(MARKETING_KEY, MARKETING_SECRET);
+    alert('Marketing mode activated');
     renderCart();
-    return true;
+  } else {
+    alert('Wrong code');
   }
-  return false;
 }
 
-/* ---------- UI helpers ---------- */
+/* ---------- UI ---------- */
 function updateCartCount() {
   const cart = getCart();
   const total = cart.reduce((s, i) => s + i.quantity, 0);
-  const el = document}
+  const el = document.getElementById('cartCount');
+  if (el) el.textContent = total;
+}
+
+/* ---------- CART RENDER ---------- */
+function renderCart() {
+  const cart = getCart();
+  const container = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+
+  if (!container) return;
+
+  container.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(item => {
+    const itemTotal = item.quantity * (item.price || 0);
+    total += itemTotal;
+
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+
+    div.innerHTML = `
+      <img src="${item.image}" alt="${item.name}">
+      <div class="cart-info">
+        <h4>${item.name}</h4>
+
+        <div class="qty-control">
+          <button onclick="changeQty('${item.id}', -1)">−</button>
+          <span>${item.quantity}</span>
+          <button onclick="changeQty('${item.id}', 1)">+</button>
+        </div>
+
+        ${
+          isMarketingMode()
+            ? `<input type="number" class="price-input"
+                 value="${item.price}"
+                 onchange="updatePrice('${item.id}', this.value)">`
+            : `<p class="price">Price hidden</p>`
+        }
+
+        <button class="remove-btn" onclick="removeFromCart('${item.id}')">
+          Remove
+        </button>
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+
+  if (totalEl) {
+    totalEl.textContent = isMarketingMode()
+      ? `₹${total}`
+      : 'Unlock marketing to see total';
+  }
+}
+
+/* ---------- Price Update ---------- */
+function updatePrice(id, value) {
+  const cart = getCart();
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+
+  item.price = Number(value) || 0;
+  saveCart(cart);
+  renderCart();
+}
+
+/* ---------- Init ---------- */
+updateCartCount();
+document.addEventListener('DOMContentLoaded', renderCart);
