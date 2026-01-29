@@ -1,119 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cart – Cutiefic</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    body { background: url("images/pattern.png"); font-family: sans-serif; }
-    .cart-item { display:flex; gap:15px; background:#fff; padding:15px; border-radius:10px; margin-bottom:15px; }
-    .cart-item img { width:80px; height:80px; object-fit:cover; border-radius:8px; }
-    .qty { display:flex; gap:10px; align-items:center; }
-    button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; }
-    .price-input { margin-top:8px; width:100px; }
-    .box { background:#fff; padding:20px; border-radius:12px; margin-top:20px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Cutiefic</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+    <div class="logo-container">
+        <a href="index.html">
+            <img src="images/logo.png" alt="Cutiefic Logo" class="main-logo">
+        </a>
+    </div>
 
-<div style="text-align:center;margin:20px;">
-  <img src="images/logo.png" style="height:70px">
-</div>
-
-<div class="box">
-  🛒 Cart Items (<span id="cartCount">0</span>)
-</div>
-
-<div id="cartItems" class="box"></div>
-
-<!-- MARKETING UNLOCK -->
-<div class="box">
-  <h3>Marketing Access</h3>
-  <input type="password" id="marketingCode" placeholder="Enter code">
-  <button onclick="unlockMarketing(document.getElementById('marketingCode').value)">
-    Unlock
-  </button>
-</div>
-
-<!-- CHECKOUT (INSIDE CART) -->
-<div class="box">
-  <h3>Checkout</h3>
-  <input id="name" placeholder="Customer Name"><br><br>
-  <input id="phone" placeholder="Phone"><br><br>
-  <textarea id="address" placeholder="Address"></textarea><br><br>
-  <button onclick="sendWhatsApp()">Send Order on WhatsApp</button>
-</div>
-
-<script src="js/cart.js"></script>
-<script>
-function renderCart() {
-  const cart = getCart();
-  const box = document.getElementById("cartItems");
-  box.innerHTML = "";
-
-  if (!cart.length) {
-    box.innerHTML = "<p>Cart is empty</p>";
-    return;
-  }
-
-  const marketing = isMarketingUnlocked();
-
-  cart.forEach(item => {
-    box.innerHTML += `
-      <div class="cart-item">
-        <img src="${item.image}">
-        <div>
-          <b>${item.name}</b>
-
-          <div class="qty">
-            <button onclick="changeQty('${item.id}',-1)">−</button>
-            ${item.quantity}
-            <button onclick="changeQty('${item.id}',1)">+</button>
-          </div>
-
-          ${marketing ? `
-            <input class="price-input"
-              type="number"
-              placeholder="Price"
-              value="${item.price || ""}"
-              oninput="updatePrice('${item.id}',this.value)">
-          ` : ""}
+    <header>
+        <div class="container">
+            <a href="cart.html" class="cart-icon">
+                🛒 <span id="cartCount">0</span>
+            </a>
         </div>
-      </div>
-    `;
-  });
-}
+    </header>
 
-function sendWhatsApp() {
-  const cart = getCart();
-  if (!cart.length) return alert("Cart empty");
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / Shopping Cart
+        </div>
 
-  let msg = "*New Cutiefic Order*\n\n";
-  msg += "*Customer Details*\n";
-  msg += "Name: " + name.value + "\n";
-  msg += "Phone: " + phone.value + "\n";
-  msg += "Address: " + address.value + "\n\n";
-  msg += "*Items*\n";
+        <h1>Your Shopping Cart 🛍️</h1>
 
-  let total = 0;
-  cart.forEach(i => {
-    msg += `• ${i.name} x${i.quantity}`;
-    if (isMarketingUnlocked() && i.price) {
-      msg += ` = ₹${i.price * i.quantity}`;
-      total += i.price * i.quantity;
-    }
-    msg += "\n";
-  });
+        <div id="emptyCart" style="display: none;">
+            <p>Your cart is empty! 😢</p>
+            <a href="index.html" class="btn">Start Shopping</a>
+        </div>
 
-  if (total) msg += `\n*Total: ₹${total}*`;
+        <div id="cartContent" style="display: none;">
+            <div class="marketing-section">
+                <input type="password" id="marketingCode" placeholder="Enter Marketing Code">
+                <button onclick="unlockPricing()" class="btn-secondary">Unlock Pricing</button>
+            </div>
 
-  window.open("https://wa.me/919020902902?text=" + encodeURIComponent(msg));
-}
+            <div id="cartItems"></div>
 
-renderCart();
-updateCartCount();
-</script>
+            <div id="cartSummary">
+                <div class="cart-total" id="totalSection" style="display: none;">
+                    <strong>Grand Total:</strong>
+                    <strong id="grandTotal">₹0</strong>
+                </div>
+                <button onclick="openCheckout()" class="btn checkout-btn">Proceed to Checkout 💳</button>
+            </div>
+        </div>
 
+        <div id="checkoutSection" class="checkout-section" style="display: none;">
+            <h2>Checkout Details</h2>
+            <form id="checkoutForm">
+                <input type="text" id="customerName" placeholder="Full Name *" required>
+                <input type="tel" id="customerPhone" placeholder="Phone Number *" required>
+                <textarea id="customerAddress" placeholder="Delivery Address *" rows="3" required></textarea>
+                <input type="text" id="transportName" placeholder="Transport Name (Optional)">
+                <button type="submit" class="btn">Send Order via WhatsApp 💬</button>
+                <button type="button" onclick="closeCheckout()" class="btn-secondary">Back to Cart</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>💕 Made with love by Cutiefic 💕</p>
+    </footer>
+
+    <script src="js/cart.js"></script>
 </body>
 </html>
