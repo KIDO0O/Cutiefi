@@ -4,48 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coming Soon - Cutiefic</title>
+
+  <!-- MAIN SITE CSS -->
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    .construction-wrapper {
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .construction-card {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: 20px;
-      padding: 40px 30px;
+    body {
       text-align: center;
-      max-width: 420px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     }
 
-    .construction-emoji {
-      font-size: 4.5rem;
+    .uc-wrapper {
+      max-width: 480px;
+      margin: 80px auto;
+      background: rgba(255,255,255,0.95);
+      padding: 40px 25px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    .uc-wrapper .emoji {
+      font-size: 4rem;
       margin-bottom: 15px;
     }
 
-    .construction-card h2 {
-      font-size: 2rem;
-      margin-bottom: 12px;
+    .uc-wrapper h2 {
       color: #ff5fa2;
+      margin-bottom: 10px;
     }
 
-    .construction-card p {
-      font-size: 1.05rem;
+    .uc-wrapper p {
       color: #666;
       margin-bottom: 25px;
       line-height: 1.5;
     }
 
-    .back-home-btn {
+    .uc-wrapper a {
       display: inline-block;
-      padding: 12px 22px;
-      border-radius: 999px;
       background: #ff5fa2;
       color: white;
-     
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER (SAME AS OTHER PAGES) -->
+  <header class="header">
+    <img src="images/logo.png" class="logo" alt="Cutiefic Logo">
+    <a href="cart.html" class="icon-btn">🛒 <span id="cartCount">0</span></a>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="uc-wrapper">
+    <div class="emoji">🚧</div>
+    <h2>Coming Soon!</h2>
+    <p>
+      This category is under construction.<br>
+      Cute products are on the way 💕
+    </p>
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+  <footer>
+    <p>💕 Made with love by Cutiefic 💕</p>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script>
+    updateCartCount();
+  </script>
+
+</body>
+</html>
