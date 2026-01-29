@@ -67,145 +67,64 @@
     </footer>
 
     <script src="js/cart.js"></script>
-    <script>
-        function renderCart() {
-            const cart = getCart();
-            const cartItemsDiv = document.getElementById('cartItems');
-            const emptyDiv = document.getElementById('emptyCart');
-            const summaryDiv = document.getElementById('cartSummary');
+<script>
+function renderCart() {
+  const cart = getCart();
+  const box = document.getElementById('cartItems');
+  box.innerHTML = '';
 
-            if (cart.length === 0) {
-                cartItemsDiv.innerHTML = '';
-                emptyDiv.style.display = 'block';
-                summaryDiv.style.display = 'none';
-                return;
-            }
+  if (!cart.length) {
+    box.innerHTML = '<p>Your cart is empty 😢</p>';
+    return;
+  }
 
-            emptyDiv.style.display = 'none';
-            summaryDiv.style.display = 'block';
+  const marketing = isMarketingUnlocked();
 
-            cartItemsDiv.innerHTML = cart.map(item => `
-                <div class="cart-item">
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="cart-item-info">
-                        <h3>${item.name}</h3>
-                        <p>SKU: ${item.sku}</p>
-                    </div>
-                    <div class="cart-item-controls">
-                        <div class="quantity-control">
-                            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">−</button>
-                            <span>${item.quantity}</span>
-                            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
-                        </div>
-                        <button class="remove-btn" onclick="removeItem('${item.id}')">Remove 🗑️</button>
-                    </div>
-                </div>
-            `).join('');
-        }
+  cart.forEach(item => {
+    box.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.image}">
+        <div>
+          <h3>${item.name}</h3>
 
-        function changeQty(id, change) {
-            const cart = getCart();
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity < 1) {
-                    removeItem(id);
-                } else {
-                    saveCart(cart);
-                    renderCart();
-                }
-            }
-        }
+          <div class="quantity-control">
+            <button onclick="changeQty('${item.id}', -1)">−</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQty('${item.id}', 1)">+</button>
+          </div>
 
-        function removeItem(id) {
-            if (confirm('Remove this item from cart?')) {
-                const cart = getCart().filter(i => i.id !== id);
-                saveCart(cart);
-                renderCart();
-            }
-        }
+          ${marketing ? `
+            <input
+              type="number"
+              placeholder="Price"
+              value="${item.price || ''}"
+              oninput="updatePrice('${item.id}', this.value)"
+            >
+          ` : ''}
+        </div>
 
-        function openCheckout() {
-            const marketingSection = document.getElementById('marketingPriceSection');
-            marketingSection.style.display = 'block';
-            document.getElementById('checkoutModal').style.display = 'flex';
-        }
+        <button onclick="removeItem('${item.id}')">🗑</button>
+      </div>
+    `;
+  });
+}
 
-        function closeCheckout() {
-            document.getElementById('checkoutModal').style.display = 'none';
-        }
+function updatePrice(id, value) {
+  const cart = getCart();
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.price = Number(value) || 0;
+  saveCart(cart);
+}
 
-        function unlockPricing() {
-            const code = document.getElementById('marketingCode').value;
-            if (setMarketingCode(code)) {
-                const cart = getCart();
-                const priceInputsDiv = document.getElementById('priceInputs');
-                priceInputsDiv.style.display = 'block';
-                priceInputsDiv.innerHTML = '<h3 style="margin-top: 20px;">Set Prices:</h3>' + 
-                    cart.map(item => `
-                        <div style="margin: 10px 0;">
-                            <label>${item.name} (${item.sku}):</label>
-                            <input type="number" id="price-${item.id}" placeholder="Price per unit" min="0" style="margin-top: 5px;">
-                        </div>
-                    `).join('');
-                alert('Marketing mode activated! You can now set prices.');
-            } else {
-                alert('Invalid marketing code.');
-            }
-        }
+function unlockMarketing() {
+  const code = document.getElementById('marketingCodeInput').value;
+  unlockMarketingMode(code);
+}
 
-        document.getElementById('checkoutForm').onsubmit = function(e) {
-            e.preventDefault();
-            const cart = getCart();
-            const name = document.getElementById('customerName').value;
-            const phone = document.getElementById('customerPhone').value;
-            const address = document.getElementById('customerAddress').value;
-            const transport = document.getElementById('transportName').value;
+renderCart();
+updateCartCount();
+</script>
 
-            let msg = '*New Order - Cutiefic*\n\n';
-            msg += '*Customer Details*\n';
-            msg += 'Name: ' + name + '\n';
-            msg += 'Phone: ' + phone + '\n';
-            msg += 'Address: ' + address + '\n';
-            if (transport) {
-                msg += 'Transport: ' + transport + '\n';
-            }
-            msg += '\n*Order Details*\n';
-
-            // Check if marketing mode is active and prices are set
-            const marketingMode = isMarketingMode();
-            let totalPrice = 0;
-
-            cart.forEach(item => {
-                msg += '• ' + item.name + ' × ' + item.quantity;
-                
-                if (marketingMode) {
-                    const priceInput = document.getElementById('price-' + item.id);
-                    if (priceInput && priceInput.value) {
-                        const price = parseFloat(priceInput.value);
-                        const itemTotal = price * item.quantity;
-                        totalPrice += itemTotal;
-                        msg += ' - Rs.' + itemTotal;
-                    }
-                }
-                
-                msg += '\n';
-            });
-
-            if (marketingMode && totalPrice > 0) {
-                msg += '\n*Total: Rs.' + totalPrice + '*';
-            }
-
-            const whatsappUrl = 'https://wa.me/919020902902?text=' + encodeURIComponent(msg);
-            window.open(whatsappUrl, '_blank');
-            closeCheckout();
-        };
-
-        window.onclick = e => {
-            if (e.target.id === 'checkoutModal') closeCheckout();
-        };
-
-        renderCart();
-    </script>
 </body>
 </html>
