@@ -168,9 +168,12 @@ h1 {
     opacity: 0;
     transition: opacity 0.3s;
 }
+.product-gallery img {
+    display: none;
+}
 
 .product-gallery img.active {
-    opacity: 1;
+    display: block;
 }
 
 .gallery-dots {
