@@ -198,21 +198,15 @@
                 });
 
                 let startX = 0;
-                // AUTO IMAGE CHANGE
-if (images.length > 1) {
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % images.length;
-
-        images.forEach((img, i) =>
-            img.classList.toggle('active', i === currentIndex)
-        );
-
-        dotsContainer.querySelectorAll('.dot').forEach((d, i) =>
-            d.classList.toggle('active', i === currentIndex)
-        );
-    }, 3000);
-}
-
+                gallery.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+                gallery.addEventListener('touchend', e => {
+                    const diff = startX - e.changedTouches[0].clientX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0 && currentIndex < images.length - 1) currentIndex++;
+                        else if (diff < 0 && currentIndex > 0) currentIndex--;
+                        images.forEach((img, i) => img.classList.toggle('active', i === currentIndex));
+                        dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+                    }
                 });
 
                 const qtyInput = card.querySelector('input[type="number"]');
