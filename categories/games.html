@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Games - Cutiefic</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="logo-container">
+        <a href="../index.html">
+            <img src="../images/logo.png" alt="Cutiefic Logo" class="main-logo">
+        </a>
+    </div>
+
+    <header>
+        <div class="container">
+            <a href="../cart.html" class="cart-icon">
+                🛒 <span id="cartCount">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+                <a href="../index.html">Home</a> / Games
+            </div>
+
+        <h1>Cute Games Collection</h1>
+
+        <div class="products-grid" id="productsGrid"></div>
+    </main>
+
+    <footer>
+        <p>💕 Made with love by Cutiefic 💕</p>
+    </footer>
+
+    <script src="../js/cart.js"></script>
+    <script>
+        const products = [
+            {
+                id: "BG001",
+                name: "Kawaii Cat Tote Bag",
+                sku: "400413",
+                images: ["../images/bag1.jpg", 
+                        "../images/bag2.jpg"]
+            },
+            {
+                id: "BG002",
+                name: "Pastel Rainbow Backpack",
+                sku: "401185",
+                images: ["../images/bag3.jpg",
+                         "../images/bag4.jpg"]
+            },
+            {
+                id: "BG003",
+                name: "Cute Animal Crossbody Bag",
+                sku: "401334",
+                images: ["../images/bag5.jpg"]
+            }
+        ];
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                const galleryHTML = product.images.map((img, idx) => 
+                    `<img src="${img}" alt="${product.name}" class="${idx === 0 ? 'active' : ''}">`
+                ).join('');
+                
+                card.innerHTML = `
+                    <div class="product-gallery">
+                        ${galleryHTML}
+                        <div class="gallery-dots"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="sku">SKU: ${product.sku}</p>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">−</button>
+                            <input type="number" value="1" min="1" readonly>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Add to Cart 🛒</button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+                
+                const gallery = card.querySelector('.product-gallery');
+                const images = gallery.querySelectorAll('img');
+                const dotsContainer = gallery.querySelector('.gallery-dots');
+                let currentIndex = 0;
+                
+                images.forEach((_, index) => {
+                    const dot = document.createElement('span');
+                    dot.className = 'dot' + (index === 0 ? ' active' : '');
+                    dot.onclick = () => {
+                        currentIndex = index;
+                        images.forEach((img, i) => img.classList.toggle('active', i === index));
+                        dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
+                    };
+                    dotsContainer.appendChild(dot);
+                });
+
+                let startX = 0;
+                gallery.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+                gallery.addEventListener('touchend', e => {
+                    const diff = startX - e.changedTouches[0].clientX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0 && currentIndex < images.length - 1) currentIndex++;
+                        else if (diff < 0 && currentIndex > 0) currentIndex--;
+                        images.forEach((img, i) => img.classList.toggle('active', i === currentIndex));
+                        dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+                    }
+                });
+
+                const qtyInput = card.querySelector('input[type="number"]');
+                card.querySelector('.minus').onclick = () => {
+                    if (qtyInput.value > 1) qtyInput.value--;
+                };
+                card.querySelector('.plus').onclick = () => {
+                    qtyInput.value++;
+                };
+
+                card.querySelector('.add-to-cart').onclick = () => {
+                    addToCart({
+                        id: product.id,
+                        name: product.name,
+                        sku: product.sku,
+                        image: product.images[0],
+                        quantity: parseInt(qtyInput.value)
+                    });
+                    qtyInput.value = 1;
+                    alert('Added to cart! 🎉');
+                };
+            });
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
