@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Uncategorized - Cutiefic</title>
+    <title>Erasers & Sharpners - Cutiefic</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -23,10 +23,10 @@
 
     <main class="container">
         <div class="breadcrumb">
-                <a href="../index.html">Home</a> / Uncategorized
-            </div>
+            <a href="../index.html">Home</a> / Erasers & Sharpners
+        </div>
 
-        <h1>Cute Unca Collection</h1>
+        <h1>Cute Erasers & Sharpners Collection</h1>
 
         <div class="products-grid" id="productsGrid"></div>
     </main>
@@ -39,26 +39,118 @@
     <script>
         const products = [
             {
-                id: "BG001",
-                name: "Kawaii Cat Tote Bag",
-                sku: "400413",
-                images: ["../images/bag1.jpg", 
-                        "../images/bag2.jpg"]
+                id: "ER001",
+                name: "Bread Eraser",
+                sku: "100413",
+                images: ["../images/a1.jpg", 
+                        "../images/a37.jpg"]
             },
             {
-                id: "BG002",
-                name: "Pastel Rainbow Backpack",
-                sku: "401185",
-                images: ["../images/bag3.jpg",
-                         "../images/bag4.jpg"]
+                id: "ER002",
+                name: "Snicker Eraser",
+                sku: "101185",
+                images: ["../images/a2.jpg",
+                         "../images/a41.jpg"]
             },
             {
-                id: "BG003",
-                name: "Cute Animal Crossbody Bag",
-                sku: "401334",
-                images: ["../images/bag5.jpg"]
-            }
+                id: "ER003",
+                name: "Pizza Eraser",
+                sku: "101334",
+                images: ["../images/a3.jpg"]
+            },
+            {
+                id: "ER004",
+                name: "MatchBox Eraser",
+                sku: "101593",
+                images: ["../images/a4.jpg",
+                         "../images/a5.jpg"]
+            },
+            {
+                id: "ER005",
+                name: "Chocolate bar Eraser",
+                sku: "101262",
+                images: ["../images/a42.jpg", 
+                        "../images/a43.jpg", 
+                        "../images/a44.jpg", 
+                        "../images/a45.jpg"]
+            },
+            {
+                id: "ER006",
+                name: "Oreo Eraser",
+                sku: "101189",
+                images: ["../images/a35.jpg", 
+                        "../images/a36.jpg"]
+            },
+
+            {
+                id: "ER007",
+                name: "Chips Eraser",
+                sku: "101187",
+                images: ["../images/a10.jpg", 
+                        "../images/a11.jpg"]
+            },
+            {
+                id: "ER008",
+                name: "Cake Eraser",
+                sku: "102132",
+                images: ["../images/a33.jpg", 
+                        "../images/a34.jpg"]
+            },
+            {
+                id: "ER009",
+                name: "MIX Eraser 36PCS",
+                sku: "102204",
+                images: ["../images/a18.jpg", 
+                        "../images/a19.jpg", 
+                        "../images/a29.jpg", 
+                        "../images/a31.jpg", 
+                        "../images/a32.jpg"]
+            },
+            {
+                id: "ER0010",
+                name: "Donut Eraser",
+                sku: "100423",
+                images: ["../images/a9.jpg",
+                        "../images/a15.jpg", 
+                        "../images/a16.jpg", 
+                        "../images/a17.jpg", 
+                        "../images/a30.jpg"]
+            },
+            {
+                id: "ER0011",
+                name: "Mirophone Eraser",
+                sku: "102208",
+                images: ["../images/a20.jpg"]
+            },
+            {
+                id: "ER0012",
+                name: "ICE-Cream Eraser & Sharpener",
+                sku: "102209",
+                images: ["../images/a21.jpg", 
+                        "../images/a22.jpg", 
+                        "../images/a23.jpg", 
+                        "../images/a25.jpg", 
+                        "../images/a28.jpg"]
+            },
+                
+            {
+                id: "ER0013",
+                name: "French Fries Eraser",
+                sku: "102210",
+                images: ["../images/a24.jpg", 
+                        "../images/a26.jpg", 
+                        "../images/a27.jpg"]
+            },
+                {
+                id: "ER0014",
+                name: "Cookie Eraser",
+                sku: "102211",
+                images: ["../images/a38.jpg", 
+                        "../images/a39.jpg", 
+                        "../images/a40.jpg"]
+                }
         ];
+
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
             
